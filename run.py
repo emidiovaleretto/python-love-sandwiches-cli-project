@@ -25,7 +25,7 @@ Enter your data here: ''')
 
     data_list = data_str.split(',')
 
-    return validate_data(data_list)
+    validate_data(data_list)
 
 
 def validate_data(values):
@@ -36,14 +36,14 @@ def validate_data(values):
     there aren't exactly six values.
     """
     try:
+        [int(values) for values in values]
         if len(values) != 6:
             raise ValueError(
                 f'Exactly 6 values must be entered and you provided '
                 f'{len(values)} value(s)')
 
     except ValueError as err:
-        return f'Invalid data: {err}, please try again.'
+        print(f'Invalid data: {err}, please try again.')
 
 
-data = get_sales_data()
-print(data)
+get_sales_data()
