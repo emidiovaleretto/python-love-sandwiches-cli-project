@@ -17,15 +17,22 @@ def get_sales_data():
     """
     Returns sales figures imput from the user.
     """
-    data_str = input('''
+    while True:
+        data_str = input('''
 Please enter sales data from last market day.
 Data should be six numbers, separated by commas.
 Example: 10, 20, 30, 40, 50, 60
 Enter your data here: ''')
 
-    data_list = data_str.split(',')
+        data_list = data_str.split(',')
 
-    validate_data(data_list)
+        is_valid = validate_data(data_list)
+
+        if is_valid:
+            print('Data is valid')
+            break
+
+    return data_list
 
 
 def validate_data(values):
@@ -44,6 +51,10 @@ def validate_data(values):
 
     except ValueError as err:
         print(f'Invalid data: {err}, please try again.')
+        return False
+
+    return True
 
 
-get_sales_data()
+data = get_sales_data()
+print(data)
