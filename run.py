@@ -23,7 +23,26 @@ Data should be six numbers, separated by commas.
 Example: 10, 20, 30, 40, 50, 60
 Enter your data here: ''')
 
-    return f'The data provided is {data_str}'
+    data_list = data_str.split(',')
+
+    return validate_data(data_list)
+
+
+def validate_data(values):
+    """
+    Validates the data input from the user.
+    Inside the try/except block, the user is prompted 
+    to enter the correct data. Raises a ValueError if 
+    there aren't exactly six values.
+    """
+    try:
+        if len(values) != 6:
+            raise ValueError(
+                f'Exactly 6 values must be entered and you provided '
+                f'{len(values)} value(s)')
+
+    except ValueError as err:
+        return f'Invalid data: {err}, please try again.'
 
 
 data = get_sales_data()
