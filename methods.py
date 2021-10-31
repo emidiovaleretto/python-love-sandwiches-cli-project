@@ -75,6 +75,23 @@ def calculate_surplus_data(sales_data):
     return surplus_data
 
 
+def calculate_stock_data(data):
+    """
+    Calculate the stock data from the sales data.
+    """
+    print('Calculating stock data...')
+
+    stock_data = []
+
+    for stock in data:
+        int_stock = [int(num) for num in stock]
+        average = sum(int_stock) / len(int_stock)
+        new_stock = round(average * 1.1)
+        stock_data.append(new_stock)
+
+    return stock_data
+
+
 def update_worksheet(data, worksheet_name):
     """
     Update the worksheet with the data provided.
@@ -82,7 +99,7 @@ def update_worksheet(data, worksheet_name):
     print(f'Updating {worksheet_name} worksheet...')
     worksheet = SHEET.worksheet(f'{worksheet_name}')
     worksheet.append_row(data)
-    print(f'{worksheet_name} worksheet updated successfully.')
+    print(f'{worksheet_name.capitalize()} worksheet updated successfully.')
 
 
 def get_last_5_entires_sales():
@@ -110,4 +127,5 @@ def main():
     new_surplus_data = calculate_surplus_data(sales_data)
     update_worksheet(new_surplus_data, 'surplus')
     sales_columns = get_last_5_entires_sales()
-    print(sales_columns)
+    new_stock = calculate_stock_data(sales_columns)
+    update_worksheet(new_stock, 'stock')
