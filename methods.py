@@ -118,6 +118,11 @@ def get_last_5_entires_sales():
 
 
 def get_stock_values(data):
+    """
+    Gets the stock figures from the stock worksheet
+    and return a string representation of the number
+    of sandwiches to be made for next market day.
+    """
 
     headings = SHEET.worksheet('stock').get_all_values()[0]
 
