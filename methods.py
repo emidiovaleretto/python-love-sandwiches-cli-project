@@ -117,6 +117,17 @@ def get_last_5_entires_sales():
     return columns
 
 
+def get_stock_values(data):
+
+    headings = SHEET.worksheet('stock').get_all_values()[0]
+
+    print('Make the following number of sandwiches for next market:\n')
+
+    dt_dict = dict(zip(headings, data))
+
+    return dt_dict
+
+
 def main():
     """
     Run all program functions
@@ -129,3 +140,4 @@ def main():
     sales_columns = get_last_5_entires_sales()
     new_stock = calculate_stock_data(sales_columns)
     update_worksheet(new_stock, 'stock')
+    get_stock_values(new_stock)
