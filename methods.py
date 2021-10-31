@@ -145,4 +145,5 @@ def main():
     sales_columns = get_last_5_entires_sales()
     new_stock = calculate_stock_data(sales_columns)
     update_worksheet(new_stock, 'stock')
-    get_stock_values(new_stock)
+    stock_next_day = get_stock_values(new_stock)
+    print(stock_next_day)
