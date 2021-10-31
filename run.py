@@ -1,3 +1,3 @@
-import methods
+from methods import main
 
-methods.main()
+main()
