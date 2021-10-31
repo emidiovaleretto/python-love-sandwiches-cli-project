@@ -22,7 +22,7 @@ def get_sales_data():
     while True:
 
         print_instructions()
-        data_str = input('Enter your data here: ')
+        data_str = input('Enter your data here:\n')
 
         data_list = data_str.split(',')
 
