@@ -13,23 +13,33 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('love_sandwiches')
 
 
+def print_instructions():
+    """
+    Print the instructions to the terminal.
+    """
+    print("""
+    Please enter sales data from last market day.
+    Data should be six numbers, separated by commas.
+    Example: 10, 20, 30, 40, 50, 60
+    """)
+
+
 def get_sales_data():
     """
     Returns sales figures imput from the user.
+    Run a while loop to collect a valid string of data from the user
+    via the terminal, which must be six integers separated by commas.
+    The loop will continue to prompt the user until the data is valid.
     """
     while True:
-        data_str = input('''
-Please enter sales data from last market day.
-Data should be six numbers, separated by commas.
-Example: 10, 20, 30, 40, 50, 60
-Enter your data here: ''')
+        print_instructions()
+        data_str = input('Enter your data here: ')
 
         data_list = data_str.split(',')
 
         is_valid = validate_data(data_list)
 
         if is_valid:
-            print('Data is valid')
             break
 
     return data_list
@@ -56,5 +66,17 @@ def validate_data(values):
     return True
 
 
+def update_sales_worksheet(values):
+    """
+    Updates the values in the worksheet,
+    add a new row with the list data provided.
+    """
+    print('Updating sales worksheet...')
+    sales_worksheet = SHEET.worksheet('sales')
+    sales_worksheet.append_row(values)
+    print('Sales worksheet updated successfully.')
+
+
 data = get_sales_data()
-print(data)
+sales_data = [int(num) for num in data]
+update_sales_worksheet(sales_data)
