@@ -85,6 +85,21 @@ def update_worksheet(data, worksheet_name):
     print(f'{worksheet_name} worksheet updated successfully.')
 
 
+def get_last_5_entires_sales():
+    """
+    Get the last 5 entries from the sales worksheet
+    and returns the data as a list of lists.
+    """
+    worksheet = SHEET.worksheet('sales')
+
+    columns = []
+    for i in range(1, 7):
+        column = worksheet.col_values(i)
+        columns.append(column[-5:])
+
+    return columns
+
+
 def main():
     """
     Run all program functions
@@ -94,3 +109,5 @@ def main():
     update_worksheet(sales_data, 'sales')
     new_surplus_data = calculate_surplus_data(sales_data)
     update_worksheet(new_surplus_data, 'surplus')
+    sales_columns = get_last_5_entires_sales()
+    print(sales_columns)
